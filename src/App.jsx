@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from "react-router-dom"
+import Quiz from './components/Quiz'
 
 class App extends Component {
 	constructor(props) {
@@ -20,6 +15,7 @@ class App extends Component {
 		return (
 			<>
 				<h1>Hello World</h1>
+				<Quiz />
 			</>
 		)
 	}
