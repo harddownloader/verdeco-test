@@ -11,6 +11,9 @@ import configureStore from '@/store/configureStore'
 import App from '@/App'
 // styles
 import '@/assets/scss/index.scss'
+// react ui
+import { ThemeProvider } from 'react-ui'
+import { tokens, components } from 'react-ui/themes/light'
 
 const rootElement = document.getElementById('root')
 
@@ -18,7 +21,9 @@ const store = configureStore()
 
 render(
 	<Provider store={store}>
-		<App store={store} />
+		<ThemeProvider tokens={tokens} components={components}>
+			<App store={store} />
+		</ThemeProvider>
 	</Provider>,
 	rootElement,
 )

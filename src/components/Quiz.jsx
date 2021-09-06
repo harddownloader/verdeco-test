@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
 
 import { questionsFetchData } from '../store/actions/questions'
+import { Grid, Column, Heading, Stack, Card, Text } from 'react-ui'
+import Actions from './Actions'
+import './Quiz.scss'
 
 class Quiz extends Component {
 	componentDidMount() {
@@ -14,12 +16,35 @@ class Quiz extends Component {
 	render() {
 		return (
 			<>
-				<h1>Quiz</h1>
-				{this.props.questions.hasOwnProperty('Quiz')
-					? this.props.questions.Quiz.Questions.map(question => {
-							return <p key={uuidv4()}>{question.QuestionText}</p>
-					  })
-					: null}
+				<Grid>
+					<Column start={5} end={8}>
+						<Stack direction='vertical' gap={8}>
+							<Heading className='heading'>Quiz</Heading>
+							<Card>
+								<Stack justify='center'>
+									<Stack direction='vertical' gap={8} align='center'>
+										<Stack
+											direction='vertical'
+											align='center'
+											css={{ paddingX: 8 }}>
+											<Text size={4}>
+												{this.props.questions.hasOwnProperty('Quiz')
+													? this.props.questions.Quiz.Questions[
+															this.props.questionNumber
+													  ].QuestionText
+													: null}
+											</Text>
+										</Stack>
+
+										<Stack direction='vertical' align='center'>
+											<Actions />
+										</Stack>
+									</Stack>
+								</Stack>
+							</Card>
+						</Stack>
+					</Column>
+				</Grid>
 			</>
 		)
 	}
@@ -30,6 +55,7 @@ const mapStateToProps = state => {
 		questions: state.questions,
 		hasErrored: state.questionsHasErrored,
 		isLoading: state.questionsIsLoading,
+		questionNumber: state.questionsCount,
 	}
 }
 

@@ -7,14 +7,9 @@ class App extends Component {
 		this.state = {}
 	}
 
-	componentDidMount() {}
-
-	// componentDidUpdate() {}
-
 	render() {
 		return (
 			<>
-				<h1>Hello World</h1>
 				<Quiz />
 			</>
 		)

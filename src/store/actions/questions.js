@@ -35,9 +35,15 @@ export function questionsFetchData(url) {
 			})
 			.then(response => response.json())
 			.then(questions => {
-				console.log('questions', questions)
 				return dispatch(questionsFetchDataSuccess(questions))
 			})
 			.catch(() => dispatch(questionsHasErrored(true)))
+	}
+}
+
+export function questionsSetAnsver(name) {
+	return {
+		type: 'INCREASE',
+		name,
 	}
 }
