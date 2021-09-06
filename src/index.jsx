@@ -15,6 +15,13 @@ import '@/assets/scss/index.scss'
 import { ThemeProvider } from 'react-ui'
 import { tokens, components } from 'react-ui/themes/light'
 
+// overwrite spinner styles
+components.Spinner = {
+	sizes: { small: 2, medium: 4, large: 6 },
+	borderColor: 'greens.800',
+	borderLeftColor: 'greens.500',
+}
+
 const rootElement = document.getElementById('root')
 
 const store = configureStore()

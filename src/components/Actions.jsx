@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Stack } from 'react-ui'
 
 import Action from './Action'
+import './Actions.scss'
 
 class Actions extends Component {
 	constructor(props) {
@@ -25,7 +26,7 @@ class Actions extends Component {
 		let ActionsBlock = []
 		this.state.buttonRows.forEach(() => {
 			ActionsBlock.push(
-				<Stack key={uuidv4()} gap={4}>
+				<Stack key={uuidv4()} gap={4} className='action_wrap'>
 					{this.getActionRow()}
 				</Stack>,
 			)

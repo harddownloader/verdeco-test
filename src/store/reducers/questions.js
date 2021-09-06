@@ -5,10 +5,10 @@ const initialState = {
 	questions: [],
 }
 
-export function questionsHasErrored(state = initialState, action) {
+export function questionsHasErrored(state = false, action) {
 	switch (action.type) {
 		case 'QUESTIONS_HAS_ERRORED':
-			return action.hasErrored
+			return true
 
 		default:
 			return state

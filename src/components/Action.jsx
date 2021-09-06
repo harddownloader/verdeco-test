@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { questionsSetAnsver } from '../store/actions/questions'
 import { Button } from 'react-ui'
+import './Action.scss'
 
 class Action extends Component {
 	render() {
@@ -9,6 +10,7 @@ class Action extends Component {
 			<>
 				{!this.props.isLoading ? (
 					<Button
+						className='action_btn'
 						onClick={() => this.props.questionsSetAnsver(this.props.name)}>
 						{this.props.name}
 					</Button>
