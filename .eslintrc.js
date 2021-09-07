@@ -5,6 +5,7 @@ module.exports = {
 	},
 	plugins: ['react', 'prettier', 'react-hooks'],
 	extends: [
+		'eslint:recommended',
 		'airbnb-base',
 		'plugin:react/recommended',
 		'plugin:react-hooks/recommended',

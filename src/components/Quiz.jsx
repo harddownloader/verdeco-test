@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import { questionsFetchData } from '../store/actions/questions'
 import { Grid, Column, Stack, Card, Text } from 'react-ui'
+import { questionsFetchData } from '../store/actions/questions'
 import QuizHeading from './QuizHeading'
 import QuizInfo from './QuizInfo'
 import Actions from './Actions'

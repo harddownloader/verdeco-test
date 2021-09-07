@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { questionsSetAnsver } from '../store/actions/questions'
 import { Button } from 'react-ui'
+import { questionsSetAnsver } from '../store/actions/questions'
 import './Action.scss'
 
 class Action extends Component {

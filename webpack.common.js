@@ -21,6 +21,8 @@ module.exports = {
 	plugins: [
 		new ESLintPlugin({
 			extensions: ['.js', 'jsx'],
+			failOnError: false, //  <== `This one`
+			emitWarning: true, //  <== `And this one`
 		}),
 
 		new HtmlWebpackPlugin({

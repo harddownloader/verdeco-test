@@ -49,22 +49,6 @@ class Actions extends Component {
 		return result
 	}
 
-	getRowYesOrNo() {
-		const result = []
-		his.state.buttonsInRow.forEach(() => {
-			this.setState(state => {
-				result.push(
-					<Action
-						key={uuidv4()}
-						name={this.state.buttonsYnN[state.countBtn]}
-					/>,
-				)
-				return { countBtn: state.countBtn + 1 }
-			})
-		})
-		return result
-	}
-
 	componentDidMount() {
 		this.setState({ actionBlock: this.getActionBlock() })
 	}
