@@ -16,7 +16,7 @@ package-lock.json
 # txt
 /*.txt
 # ! - кроме
-yarn.lock
+; yarn.lock
 
 # Logs
 logs
