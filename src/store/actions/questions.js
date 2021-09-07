@@ -19,7 +19,9 @@ export function questionsFetchDataSuccess(questions) {
 	}
 }
 
-export function questionsFetchData(url) {
+export function questionsFetchData() {
+	const url =
+		'https://gtiw.gtinvest.com:44300/api/QuizPassings/GetById?passingId=D4FCA825-9E5C-400E-B653-E37581262524'
 	return dispatch => {
 		dispatch(questionsIsLoading(true))
 

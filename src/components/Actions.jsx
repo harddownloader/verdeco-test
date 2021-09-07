@@ -17,13 +17,14 @@ class Actions extends Component {
 				'Удовлетворительно',
 				'Неудовлетворительно',
 			],
+			buttonsYnN: ['Да', 'Нет'],
 			actionBlock: [],
 			countBtn: 0,
 		}
 	}
 
 	getActionBlock() {
-		let ActionsBlock = []
+		const ActionsBlock = []
 		this.state.buttonRows.forEach(() => {
 			ActionsBlock.push(
 				<Stack key={uuidv4()} gap={4} className='action_wrap'>
@@ -36,11 +37,27 @@ class Actions extends Component {
 	}
 
 	getActionRow() {
-		let result = []
+		const result = []
 		this.state.buttonsInRow.forEach(() => {
 			this.setState(state => {
 				result.push(
 					<Action key={uuidv4()} name={this.state.buttons[state.countBtn]} />,
+				)
+				return { countBtn: state.countBtn + 1 }
+			})
+		})
+		return result
+	}
+
+	getRowYesOrNo() {
+		const result = []
+		his.state.buttonsInRow.forEach(() => {
+			this.setState(state => {
+				result.push(
+					<Action
+						key={uuidv4()}
+						name={this.state.buttonsYnN[state.countBtn]}
+					/>,
 				)
 				return { countBtn: state.countBtn + 1 }
 			})
@@ -56,7 +73,16 @@ class Actions extends Component {
 		return (
 			<>
 				<Stack align='center' direction='vertical' gap={4}>
-					{this.state.actionBlock}
+					{this.props.isUserChoice ? (
+						this.state.actionBlock
+					) : this.props.isLastQuestion ? (
+						<Stack gap={4} className='action_wrap'>
+							<Action name='Да' />
+							<Action name='Нет' />
+						</Stack>
+					) : (
+						<Action name='ОК' />
+					)}
 				</Stack>
 			</>
 		)

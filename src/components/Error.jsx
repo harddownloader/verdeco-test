@@ -8,7 +8,6 @@ class Error extends Component {
 	}
 
 	render() {
-		// return <Text>{this.props.title}</Text>
 		return <Alert variant='warning'>{this.props.title}</Alert>
 	}
 }

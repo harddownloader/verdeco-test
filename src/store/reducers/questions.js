@@ -1,10 +1,3 @@
-const initialState = {
-	hasErrored: false,
-	count: 0,
-	isLoading: true,
-	questions: [],
-}
-
 export function questionsHasErrored(state = false, action) {
 	switch (action.type) {
 		case 'QUESTIONS_HAS_ERRORED':
@@ -15,7 +8,7 @@ export function questionsHasErrored(state = false, action) {
 	}
 }
 
-export function questionsIsLoading(state = initialState, action) {
+export function questionsIsLoading(state = true, action) {
 	switch (action.type) {
 		case 'QUESTIONS_IS_LOADING':
 			return action.isLoading
@@ -25,7 +18,7 @@ export function questionsIsLoading(state = initialState, action) {
 	}
 }
 
-export function questions(state = initialState, action) {
+export function questions(state = [], action) {
 	switch (action.type) {
 		case 'QUESTIONS_FETCH_DATA_SUCCESS':
 			return action.questions

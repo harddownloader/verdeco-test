@@ -9,12 +9,12 @@ import Actions from './Actions'
 import Done from './Done'
 import Loader from './Loader'
 import Error from './Error'
+import Footer from './Footer'
+import './Quiz.scss'
 
 class Quiz extends Component {
 	componentDidMount() {
-		this.props.fetchData(
-			'https://gtiw.gtinvest.com:44300/api/QuizPassings/GetById?passingId=D4FCA825-9E5C-400E-B653-E37581262524',
-		)
+		this.props.fetchData()
 	}
 
 	isUserAnsweredAllQuestions() {
@@ -27,12 +27,27 @@ class Quiz extends Component {
 		return false
 	}
 
+	getCoutnQuestions(questions) {
+		let counter = 0
+		questions.forEach(question => {
+			if (question.GroupId) counter++
+		})
+		return counter
+	}
+
+	getCountUserAnswers(questions, userAnswers) {
+		let counter = 0
+		for (let i = 0; i < userAnswers; i++) {
+			if (questions[i].GroupId) counter++
+		}
+		return counter
+	}
+
 	render() {
 		const hasQuiz = this.props.questions.hasOwnProperty('Quiz')
 		const quizHeading = hasQuiz ? this.props.questions.Quiz.Name : null
-		const questionsQta = hasQuiz
-			? this.props.questions.Quiz.Questions.length - 1
-			: null
+		const questions = hasQuiz ? this.props.questions.Quiz.Questions : null
+		const questionsQta = hasQuiz ? questions.length - 1 : null
 		const isLimitOut = () => {
 			if (hasQuiz && this.props.questionNumber > questionsQta) {
 				return true
@@ -41,9 +56,14 @@ class Quiz extends Component {
 		}
 		const currentQuestion =
 			hasQuiz && !isLimitOut()
-				? this.props.questions.Quiz.Questions[this.props.questionNumber]
-						.QuestionText
+				? questions[this.props.questionNumber].QuestionText
 				: null
+		const isLastQuestion = () => {
+			if (hasQuiz && this.props.questionNumber === questionsQta) {
+				return true
+			}
+			return false
+		}
 
 		return (
 			<>
@@ -66,13 +86,18 @@ class Quiz extends Component {
 											<>
 												{/* Question */}
 												<QuizInfo
-													yourAnsvers={this.props.questionNumber}
-													totalQuestions={questionsQta + 1}
+													// yourAnsvers={this.props.questionNumber}
+													// totalQuestions={questionsQta + 1}
+													yourAnsvers={this.getCountUserAnswers(
+														questions,
+														this.props.questionNumber,
+													)}
+													totalQuestions={this.getCoutnQuestions(questions) + 1}
 												/>
 												<Stack
 													direction='vertical'
 													align='center'
-													css={{ paddingX: 8 }}>
+													className='question'>
 													<Text size={4} align='center'>
 														{currentQuestion}
 													</Text>
@@ -80,7 +105,12 @@ class Quiz extends Component {
 
 												{/* Buttons */}
 												<Stack direction='vertical' align='center'>
-													<Actions />
+													<Actions
+														isUserChoice={
+															questions[this.props.questionNumber].GroupId
+														}
+														isLastQuestion={isLastQuestion()}
+													/>
 												</Stack>
 											</>
 										</Stack>
@@ -94,6 +124,7 @@ class Quiz extends Component {
 						</Stack>
 					</Column>
 				</Grid>
+				<Footer />
 			</>
 		)
 	}
@@ -110,7 +141,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchData: url => dispatch(questionsFetchData(url)),
+		fetchData: () => dispatch(questionsFetchData()),
 	}
 }
 
